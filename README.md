@@ -1,5 +1,5 @@
 # 💫 About Me:
-⚡ My name is Aziz, and I am a 19 year old developer pursuing a Bachelor's Degree in Computer Science at UCF!<br>🔭 I’m currently working on a project that helps the fitness community find restaurant meals that align with their macro goals.<br>🌱 I’m currently learning full stack development technologies, such as React, Node.js, Express.js, Tailwind, and PostgreSQL.<br>💬 Ask me about my most recent project, Project MacroMatch.
+⚡ My name is Aziz, and I am a developer pursuing a Bachelor's Degree in Computer Science at UCF!<br>🔭 I’m currently working on a project that helps the fitness community find restaurant meals that align with their macro goals.<br>🌱 I’m currently learning full stack development technologies, such as React, Node.js, Express.js, Tailwind, and PostgreSQL.<br>💬 Ask me about my most recent project, Project MacroMatch.
 
 
 ## 🌐 Socials:
