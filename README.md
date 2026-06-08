@@ -1,9 +1,9 @@
 # 💫 About Me:
-⚡ I'm Aziz, a software engineer and Computer Science student at UCF.<br>💻 I build AI-integrated web applications, mostly with TypeScript, React, and Next.js.<br>🔭 Right now I'm a developer at Knight Hacks and a research assistant at the ISUE Lab.<br>♟️ When I'm not coding you'll usually find me playing chess or at a hackathon.
+⚡ I'm Aziz, a software engineer and Computer Science student at UCF.<br>💻 I build AI-integrated web applications, mostly with TypeScript, React, and Next.js.<br>🔭 Currently I'm a developer at Knight Hacks and a research assistant at the ISUE Lab.<br>♟️ When I'm not coding you'll usually find me playing chess or at a hackathon.
 
 
 ## 🌐 Socials:
-[![Portfolio](https://img.shields.io/badge/Portfolio-%237C3AED.svg?logo=googlechrome&logoColor=white)](https://azizu.dev) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/aziz.u_) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/abduaziz-umarov)
+[![Portfolio](https://img.shields.io/badge/Portfolio-%237C3AED.svg?logo=aboutdotme&logoColor=white)](https://azizu.dev) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/aziz.u_) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/abduaziz-umarov)
 
 
 # 💻 Tech Stack:
