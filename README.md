@@ -3,7 +3,7 @@
 
 
 ## 🌐 Socials:
-[![Portfolio](https://img.shields.io/badge/Portfolio-%237C3AED.svg?logo=aboutdotme&logoColor=white)](https://azizu.dev) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/aziz.u_) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/abduaziz-umarov)
+[![Portfolio](https://img.shields.io/badge/Portfolio-%237C3AED.svg?logo=googleearth&logoColor=white)](https://azizu.dev) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/aziz.u_) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/abduaziz-umarov)
 
 
 # 💻 Tech Stack:
