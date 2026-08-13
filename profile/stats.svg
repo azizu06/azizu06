@@ -20,7 +20,7 @@
             /* Selector detects Firefox */
             .header { font-size: 15.5px; }
           }
-          
+
     .stat {
       font: 600 14px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; fill: #38bdae;
     }
@@ -42,7 +42,7 @@
     .rank-percentile-text {
       font-size: 16px;
     }
-    
+
     .not_bold { font-weight: 400 }
     .bold { font-weight: 700 }
     .icon {
@@ -67,7 +67,7 @@
       transform: rotate(-90deg);
       animation: rankAnimation 1s forwards ease-in-out;
     }
-    
+
     @keyframes rankAnimation {
       from {
         stroke-dashoffset: 251.32741228718345;
@@ -76,10 +76,10 @@
         stroke-dashoffset: 107.41958872455612;
       }
     }
-  
-  
 
-          
+
+
+
       /* Animations */
       @keyframes scaleInAnimation {
         from {
@@ -97,11 +97,11 @@
           opacity: 1;
         }
       }
-    
-          
+
+
         </style>
 
-        
+
 
         <rect
           data-testid="card-bg"
@@ -115,7 +115,7 @@
           stroke-opacity="1"
         />
 
-        
+
       <g
         data-testid="card-title"
         transform="translate(25, 35)"
@@ -129,29 +129,29 @@
       >Abduaziz Umarov&#39;s GitHub Stats</text>
     </g>
       </g>
-    
+
 
         <g
           data-testid="main-card-body"
           transform="translate(0, 55)"
         >
-          
+
     <g data-testid="rank-circle"
           transform="translate(365, 47.5)">
         <circle class="rank-circle-rim" cx="-10" cy="8" r="40" />
         <circle class="rank-circle" cx="-10" cy="8" r="40" />
         <g class="rank-text">
-          
+
         <text x="-5" y="3" alignment-baseline="central" dominant-baseline="central" text-anchor="middle" data-testid="level-rank-icon">
           B+
         </text>
-      
+
         </g>
       </g>
     <svg x="0" y="0">
       <g transform="translate(0, 0)">
     <g class="stagger" style="animation-delay: 450ms" transform="translate(25, 0)">
-      
+
       <text class="stat  bold"  y="12.5">Total Stars Earned:</text>
       <text
         class="stat  bold"
@@ -162,7 +162,7 @@
     </g>
   </g><g transform="translate(0, 25)">
     <g class="stagger" style="animation-delay: 600ms" transform="translate(25, 0)">
-      
+
       <text class="stat  bold"  y="12.5">Total Commits:</text>
       <text
         class="stat  bold"
@@ -173,7 +173,7 @@
     </g>
   </g><g transform="translate(0, 50)">
     <g class="stagger" style="animation-delay: 750ms" transform="translate(25, 0)">
-      
+
       <text class="stat  bold"  y="12.5">Total PRs:</text>
       <text
         class="stat  bold"
@@ -184,7 +184,7 @@
     </g>
   </g><g transform="translate(0, 75)">
     <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
-      
+
       <text class="stat  bold"  y="12.5">Total Issues:</text>
       <text
         class="stat  bold"
@@ -195,7 +195,7 @@
     </g>
   </g><g transform="translate(0, 100)">
     <g class="stagger" style="animation-delay: 1050ms" transform="translate(25, 0)">
-      
+
       <text class="stat  bold"  y="12.5">Contributed to (last year):</text>
       <text
         class="stat  bold"
@@ -206,7 +206,6 @@
     </g>
   </g>
     </svg>
-  
+
         </g>
       </svg>
-    

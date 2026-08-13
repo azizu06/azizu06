@@ -37,6 +37,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_on_error: true
 
+      - name: Normalize generated SVGs
+        run: |
+          perl -pi -e 's/[ \t]+$//' profile/stats.svg profile/top-langs.svg
+          perl -0pi -e 's/\s+\z/\n/' profile/stats.svg profile/top-langs.svg
+
       - name: Commit refreshed cards
         run: |
           git config user.name "github-actions[bot]"
