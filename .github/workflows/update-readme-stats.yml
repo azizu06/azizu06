@@ -66,7 +66,7 @@ jobs:
       - name: Validate generated cards
         run: |
           test "$(find profile -maxdepth 1 -type f -name '*.svg' | wc -l)" -eq 2
-          xmllint --noout profile/stats.svg profile/top-langs.svg
+          python -c 'import xml.etree.ElementTree as ET; [ET.parse(path) for path in ("profile/stats.svg", "profile/top-langs.svg")]'
           grep -q 'Total Stars Earned' profile/stats.svg
           grep -q 'Most Used Languages' profile/top-langs.svg
           ! grep -Eqi '<(script|foreignObject|image|a|iframe)([ >])|Something went wrong|PAT_1|rate limit' profile/stats.svg profile/top-langs.svg
