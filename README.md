@@ -5,9 +5,7 @@
 ## 🌐 Socials:
 <p>
   <a href="https://azizu.dev"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-%237C3AED.svg?logo=googleearth&amp;logoColor=white" height="20"></a>
-  <a href="https://instagram.com/aziz.u_"><img alt="Instagram" src="https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&amp;logoColor=white" height="20"></a>
   <a href="https://linkedin.com/in/abduaziz-umarov"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yMC40NSAyMC40NWgtMy41NnYtNS41N2MwLTEuMzMtLjAyLTMuMDQtMS44NS0zLjA0LTEuODUgMC0yLjE0IDEuNDUtMi4xNCAyLjk0djUuNjdIOS4zNFY5aDMuNDJ2MS41NmguMDVjLjQ4LS45IDEuNjQtMS44NSAzLjM3LTEuODUgMy42IDAgNC4yNyAyLjM3IDQuMjcgNS40NXY2LjI5ek01LjM0IDcuNDNhMi4wNyAyLjA3IDAgMSAxIDAtNC4xNCAyLjA3IDIuMDcgMCAwIDEgMCA0LjE0ek03LjEyIDIwLjQ1SDMuNTVWOWgzLjU3djExLjQ1ek0yMi4yMiAwSDEuNzdDLjc5IDAgMCAuNzcgMCAxLjczdjIwLjU0QzAgMjMuMjMuNzkgMjQgMS43NyAyNGgyMC40NWMuOTggMCAxLjc4LS43NyAxLjc4LTEuNzNWMS43M0MyNCAuNzcgMjMuMiAwIDIyLjIyIDB6Ii8+PC9zdmc+&amp;logoColor=white" height="20"></a>
-  <a href="https://x.com/azizbuildss"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-%23000000.svg?logo=x&amp;logoColor=white" height="20"></a>
 </p>
 
 
