@@ -9,7 +9,7 @@
         aria-labelledby="descId"
       >
         <title id="titleId">Abduaziz Umarov&#39;s GitHub Stats, Rank: B+</title>
-        <desc id="descId">Total Stars Earned: 2, Total Commits  : 2542, Total PRs: 608, Total Issues: 593, Contributed to (last year): 5</desc>
+        <desc id="descId">Total Stars Earned: 5, Total Commits  : 2550, Total PRs: 610, Total Issues: 594, Contributed to (last year): 5</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 106.18766832693848;
+        stroke-dashoffset: 101.75368453123248;
       }
     }
 
@@ -158,7 +158,7 @@
         x="204.01"
         y="12.5"
         data-testid="stars"
-      >2</text>
+      >5</text>
     </g>
   </g><g transform="translate(0, 25)">
     <g class="stagger" style="animation-delay: 600ms" transform="translate(25, 0)">
@@ -180,7 +180,7 @@
         x="204.01"
         y="12.5"
         data-testid="prs"
-      >608</text>
+      >610</text>
     </g>
   </g><g transform="translate(0, 75)">
     <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
@@ -191,7 +191,7 @@
         x="204.01"
         y="12.5"
         data-testid="issues"
-      >593</text>
+      >594</text>
     </g>
   </g><g transform="translate(0, 100)">
     <g class="stagger" style="animation-delay: 1050ms" transform="translate(25, 0)">
