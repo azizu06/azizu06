@@ -1,5 +1,5 @@
 # 💫 About Me:
-⚡ I'm Aziz, a software engineer and Computer Science student at UCF.<br>💻 I build AI-integrated web applications, mostly with TypeScript, React, and Next.js.<br>🔭 Currently I'm a developer at Knight Hacks and a research assistant at the ISUE Lab.<br>⌨️ I'm a Neovim enthusiast and like working from the terminal with a keyboard-first setup.<br>♟️ When I'm not coding you'll usually find me playing chess or at a hackathon.
+⚡ I'm Aziz, a software engineer and Computer Science student at UCF.<br>💻 I like building the systems behind products, mostly backend and full-stack work.<br>⌨️ I'm a Neovim enthusiast and like working from the terminal with a keyboard-first setup.<br>♟️ When I'm not coding you'll usually find me playing chess or at a hackathon.
 
 
 ## 🌐 Socials:
