@@ -8,8 +8,8 @@
         role="img"
         aria-labelledby="descId"
       >
-        <title id="titleId">Abduaziz Umarov&#39;s GitHub Stats, Rank: A-</title>
-        <desc id="descId">Total Stars Earned: 42, Total Commits  : 2961, Total PRs: 955, Total Issues: 691, Contributed to (last year): 5</desc>
+        <title id="titleId">Abduaziz Umarov&#39;s GitHub Stats, Rank: A</title>
+        <desc id="descId">Total Stars Earned: 43, Total Commits  : 3125, Total PRs: 1070, Total Issues: 702, Contributed to (last year): 5</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 67.169021460713;
+        stroke-dashoffset: 59.81550962365286;
       }
     }
 
@@ -143,7 +143,7 @@
         <g class="rank-text">
 
         <text x="-5" y="3" alignment-baseline="central" dominant-baseline="central" text-anchor="middle" data-testid="level-rank-icon">
-          A-
+          A
         </text>
 
         </g>
@@ -158,7 +158,7 @@
         x="204.01"
         y="12.5"
         data-testid="stars"
-      >42</text>
+      >43</text>
     </g>
   </g><g transform="translate(0, 25)">
     <g class="stagger" style="animation-delay: 600ms" transform="translate(25, 0)">
@@ -169,7 +169,7 @@
         x="204.01"
         y="12.5"
         data-testid="commits"
-      >3k</text>
+      >3.1k</text>
     </g>
   </g><g transform="translate(0, 50)">
     <g class="stagger" style="animation-delay: 750ms" transform="translate(25, 0)">
@@ -180,7 +180,7 @@
         x="204.01"
         y="12.5"
         data-testid="prs"
-      >955</text>
+      >1.1k</text>
     </g>
   </g><g transform="translate(0, 75)">
     <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
@@ -191,7 +191,7 @@
         x="204.01"
         y="12.5"
         data-testid="issues"
-      >691</text>
+      >702</text>
     </g>
   </g><g transform="translate(0, 100)">
     <g class="stagger" style="animation-delay: 1050ms" transform="translate(25, 0)">
