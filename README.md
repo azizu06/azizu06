@@ -1,5 +1,5 @@
 # 💫 About Me:
-⚡ I'm Aziz, a software engineer and Computer Science student at UCF.<br>🍅 Software engineering intern at Versant Media, working on Rotten Tomatoes search.<br>🔭 Looking for Summer 2027 SWE internships.<br>💻 I build backend systems and put AI features into real products.<br>♟️ When I'm not coding you'll usually find me playing chess or at a hackathon.
+⚡ I'm Aziz, a Computer Science student at UCF.<br>🍅 Software engineering intern at Versant Media, working on Rotten Tomatoes search.<br>💻 I build backend systems and put AI features into real products.<br>♟️ When I'm not coding you'll usually find me playing chess or at a hackathon.<br>🔭 Looking for Summer 2027 SWE internships.
 
 
 ## 🌐 Socials:
