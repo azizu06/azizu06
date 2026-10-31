@@ -16,7 +16,7 @@
 - **[Shields.io contributions](https://github.com/badges/shields/pulls?q=is%3Apr+author%3Aazizu06+is%3Amerged)**: 3 merged PRs to the 27,000+ star service behind README badges: Azure DevOps auth, draft-PR filters on GitHub badges, and an SSRF fix across 7 badge routes.
 - **[AI Coding Interview Practice](https://github.com/azizu06/ai-coding-interview-practice)**: ten timed problems for practicing the AI-assisted coding interview with your own coding agent. Each problem ships with two planted bugs and timed tests that brute force won't pass, and an interviewer prompt has the agent run the session and score you. 41 stars, my most-starred repo.
 - **[SnapList](https://github.com/azizu06/snaplist)**: iPhone app I built solo that turns photos of a used item into a priced, ready-to-post resale listing. SwiftUI, TypeScript, Supabase.
-- **[Rehearse](https://github.com/azizu06/rehearse)**: Go tool for disaster-recovery drills, built to restore real restic backups into an isolated Docker sandbox, run health checks, and write an evidence report. Those parts are built and tested on their own, and the one command that runs a full drill is next.
+- **[Rehearse](https://github.com/azizu06/rehearse)**: Go tool that runs disaster-recovery drills: it restores real restic backups into an isolated Docker sandbox, runs health checks against the recovered app, and writes an evidence report proving the backup works.
 
 
 # 💻 Tech Stack:
