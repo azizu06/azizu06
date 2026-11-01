@@ -80,7 +80,7 @@ def main():
                 ctx = b.new_context(viewport=vp, color_scheme=theme, device_scale_factor=2)
                 pg = ctx.new_page()
                 pg.goto(f"{base}/_page-{theme}{'-m' if mobile else ''}.html")
-                pg.wait_for_timeout(26000 if mobile else 31000)
+                pg.wait_for_timeout(30000 if mobile else 32000)
                 name = f"{'mobile' if mobile else 'desktop'}-{theme}.png"
                 pg.screenshot(path=str(OUT / name), full_page=True)
                 ctx.close()
@@ -93,11 +93,11 @@ def main():
         t0 = time.time()
         pg.goto(f"{base}/_page-dark.html")
         hero = pg.locator("article img").first
-        for i, at in enumerate([2.6, 4.4, 11.5, 18.5, 27.0]):
+        for i, at in enumerate([2.6, 4.4, 12.0, 19.0, 29.0]):
             pg.wait_for_timeout(max(0, (at - (time.time() - t0)) * 1000))
             hero.screenshot(path=str(OUT / f"frame-{i + 1}-t{at:g}s.png"))
             print("frame", at)
-        pg.wait_for_timeout(max(0, (34.5 - (time.time() - t0)) * 1000))
+        pg.wait_for_timeout(max(0, (36.5 - (time.time() - t0)) * 1000))
         video = pg.video.path()
         box = hero.bounding_box()
         ctx.close()

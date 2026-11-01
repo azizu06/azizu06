@@ -29,9 +29,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
 
-# Cursor blink. Aziz's Ghostty config sets cursor-style-blink = false, so the
-# default matches his terminal. Flip to True for a blinking block.
-BLINK = False
+# Cursor blink. His Ghostty config has cursor-style-blink = false, but the
+# README reads better with a blinking block, so looks win here.
+BLINK = True
 
 # ---------------------------------------------------------------------------
 # THEMES: Catppuccin Mocha (his Ghostty, herdr and Neovim theme) and Latte
@@ -120,7 +120,7 @@ LSDIR = "teal b"  # oh-my-zsh LSCOLORS "Gxfx...": directories bold cyan
 LS_PROJECTS = ["backrooms", "crisislens", "farsight", "shields", "snaplist"]
 
 WINS_DESK = [
-    ("crisislens", "1st, Databricks Challenge · Hacklytics 2026"),
+    ("crisislens", "Databricks 1st · Hacklytics 2026"),
     ("farsight", "4 sponsor tracks · Knight Hacks IX"),
     ("backrooms", "Hyphenate track prize · Cal Hacks 13.0"),
 ]
@@ -361,12 +361,31 @@ def tree_lines():
     return out
 
 
+PLAN = [
+    [("UCF Computer Science, May 2028", "t")],
+    [("SWE Intern, Versant Media (Rotten Tomatoes)", "t")],
+    [("backend systems + applied AI", "subtext0")],
+    [("open to Summer 2027 SWE internships", "green")],
+]
+
+
 def script(width, mobile):
     wins = WINS_MOB if mobile else WINS_DESK
+    if mobile:
+        tree = tree_lines()
+        tree[0] = [("~/dotfiles", B)]
+        return [
+            ("~", "tree -L 1 ~/dotfiles", tree),
+            ("~", "whoami", [[("azizu06", "t")]]),
+            ("~", "cat .plan", PLAN),
+            ("~", "ls ~/projects", ls_columns(LS_PROJECTS, width)),
+            ("~", "cat wins.txt", [[(n.ljust(11), "blue"), (w, "t")] for n, w in wins]),
+            ("~", "gh pr list -R badges/shields -A @me -s merged", gh_lines(width)),
+        ]
     return [
         ("~", "whoami", [[("azizu06", "t")]]),
         ("~", "ls ~/projects", ls_columns(LS_PROJECTS, width)),
-        ("~", "cat wins.txt", [[(n.ljust(12), "blue"), (w, "t")] for n, w in wins]),
+        ("~", "cat wins.txt", [[(n.ljust(11), "blue"), (w, "t")] for n, w in wins]),
         ("~", "gh pr list -R badges/shields -A @me -s merged", gh_lines(width)),
         ("~", "z dotfiles", []),
         ("dotfiles", "tree -L 1", tree_lines()),
@@ -548,8 +567,7 @@ def nvim_pane(tl: Timeline, x0, y0, cw, lh, rows, width_cols, pane_w, t, focus_e
     zw = 7 * cw
     bar.append(f'<rect x="{f(zx - zw)}" y="{f(sy)}" width="{f(zw)}" height="{lh}" class="blue"/>'
                + arrow_l(zx - zw, "blue"))
-    bar.append(tl.shown([(0, tl.D / 2)], seg_text(zx - zw + cw, "21:47", "mantle b"), static_t))
-    bar.append(tl.shown([(tl.D / 2, tl.D)], seg_text(zx - zw + cw, "21:48", "mantle b"), static_t))
+    bar.append(seg_text(zx - zw + 2 * cw, "lua", "mantle b"))
     yw = 11 * cw
     yx = zx - zw - 7 - yw
     bar.append(f'<rect x="{f(yx)}" y="{f(sy)}" width="{f(yw)}" height="{lh}" class="surface0"/>'
@@ -593,39 +611,109 @@ def box(x, y, w, h, color):
             f'fill="none" stroke="{color}" stroke-width="1"/>')
 
 
+def digits_clock(x, y, cw, cls):
+    """HH:MM:SS that really ticks: each digit position stacks its glyphs and
+    shows one per slot, on its own SMIL loop (10 s, 60 s, 600 s)."""
+    out = [f'<text x="{f(x)}" y="{f(y)}" class="m {cls}">21:4</text>']
+
+    def digit(col, count, slot, start):
+        parts = []
+        dur = count * slot
+        for i in range(count):
+            d = (start + i) % count
+            a, b = i * slot / dur, (i + 1) * slot / dur
+            vals, kts = [], []
+            if a > 0:
+                vals.append(0); kts.append(0)
+            vals.append(1); kts.append(a)
+            if b < 1:
+                vals.append(0); kts.append(b)
+            kt = ";".join(f"{k:.4f}" for k in kts)
+            base = 1 if i == 0 else 0
+            parts.append(f'<text x="{f(x + col * cw)}" y="{f(y)}" class="m {cls}" opacity="{base}">'
+                         f'<animate attributeName="opacity" dur="{dur:g}s" repeatCount="indefinite" '
+                         f'calcMode="discrete" values="{";".join(map(str, vals))}" keyTimes="{kt}"/>{d}</text>')
+        return "".join(parts)
+
+    out.append(digit(4, 10, 60, 7))   # minute ones: 21:47 -> 21:48 ...
+    out.append(f'<text x="{f(x + 5 * cw)}" y="{f(y)}" class="m {cls}">:</text>')
+    out.append(digit(6, 6, 10, 0))    # seconds tens
+    out.append(digit(7, 10, 1, 0))    # seconds ones
+    return "".join(out)
+
+
+def status_bar(tl, x, y, w, cw, lh, t, panes, focus_t, mobile):
+    """tmux/herdr-style bar: session pill, pane list, live clock."""
+    ty = y + lh * 0.74
+    s = [f'<rect x="{f(x)}" y="{f(y)}" width="{f(w)}" height="{lh}" class="mantle"/>']
+    sess = " aziz "
+    sw = len(sess) * cw
+    s.append(f'<rect x="{f(x)}" y="{f(y)}" width="{f(sw)}" height="{lh}" class="blue"/>')
+    s.append(f'<text x="{f(x)}" y="{f(ty)}" class="m mantle b">{sess}</text>')
+    px = x + sw + cw
+    for i, name in enumerate(panes):
+        label = f"{i + 1}:{name}"
+        on = (0, focus_t) if i == 0 else (focus_t, tl.D)
+        off = [(focus_t, tl.D)] if i == 0 else [(0, focus_t)]
+        if len(panes) == 1:
+            on, off = (0, tl.D), []
+        lw_ = (len(label) + 2) * cw
+        act = (f'<rect x="{f(px)}" y="{f(y)}" width="{f(lw_)}" height="{lh}" class="surface0"/>'
+               f'<text x="{f(px + cw)}" y="{f(ty)}" class="m blue b">{esc(label)}*</text>')
+        idle = f'<text x="{f(px + cw)}" y="{f(ty)}" class="m overlay1">{esc(label)}</text>'
+        s.append(tl.shown([on], act))
+        if off:
+            s.append(tl.shown(off, idle))
+        px += lw_
+    right = "azizu06" if mobile else "azizu06 · ghostty"
+    clock_w = 8 * cw
+    cx = x + w - clock_w - cw
+    s.append(f'<rect x="{f(cx - cw)}" y="{f(y)}" width="{f(clock_w + 2 * cw)}" height="{lh}" class="surface0"/>')
+    s.append(digits_clock(cx, ty, cw, "text b"))
+    s.append(f'<text x="{f(cx - 2 * cw)}" y="{f(ty)}" text-anchor="end" class="m overlay1">{esc(right)}</text>')
+    return "".join(s)
+
+
+def border_label(x, y, label, cw, cls, t):
+    w = (len(label) + 2) * cw
+    return (f'<rect x="{f(x + 8)}" y="{f(y - 1)}" width="{f(w)}" height="3" class="base"/>'
+            f'<text x="{f(x + 8 + cw)}" y="{f(y + 4)}" class="m {cls} b">{esc(label)}</text>')
+
+
 def hero(t, mobile):
     if mobile:
         W, size, lh = 380, 11.5, 16
     else:
-        W, size, lh = 860, 12, 17
+        W, size, lh = 860, 13, 18
     cw = size * 0.6
     title_h = 30
     padx, pady = 10, 8
     rows = 21 if not mobile else 20
-    tab_y = title_h + pady
-    pane_y = tab_y + lh + 5
-    pane_h = rows * lh + 10
-    H = int(pane_y + pane_h + pady)
+    pane_y = title_h + pady + 4
+    pane_h = rows * lh + 12
+    bar_y = pane_y + pane_h + 6
+    H = int(bar_y + lh + pady)
     inner_w = W - 2 * padx
 
     focus_switch = 0 if mobile else 5.2
-    D = 34.0 if not mobile else 30.0
+    D = 36.0 if not mobile else 34.0
     tl = Timeline(D)
     body = [f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="10" class="base" '
             f'stroke="{t["frame"]}" stroke-width="1"/>']
     body.append(traffic_lights(18, title_h / 2))
-    title = "herdr" if mobile else "herdr — nvim aziz.lua"
+    title = "herdr: aziz" if mobile else "herdr: aziz — nvim aziz.lua"
     body.append(f'<text x="{W / 2}" y="{title_h / 2 + 4}" text-anchor="middle" class="s subtext0" '
                 f'font-size="12.5" font-weight="600">{esc(title)}</text>')
-    body.append(herdr_tabs(tl, padx, tab_y, inner_w, cw, lh))
 
     if mobile:
         px, pw = padx, inner_w
         cols = int((pw - 14) // cw)
-        clip = f'<clipPath id="shm"><rect x="{px + 1}" y="{pane_y + 1}" width="{pw - 2}" height="{pane_h - 2}"/></clipPath>'
-        sh, end_t = shell_pane(tl, px + 7, pane_y + 5, cw, lh, rows, cols, 0.6, True, t)
+        clip = f'<clipPath id="shm"><rect x="{px + 1}" y="{pane_y + 7}" width="{pw - 2}" height="{rows * lh}"/></clipPath>'
+        sh, end_t = shell_pane(tl, px + 7, pane_y + 7, cw, lh, rows, cols, 0.6, True, t)
         body.append(clip + f'<g clip-path="url(#shm)">{sh}</g>')
         body.append(box(px, pane_y, pw, pane_h, t["blue"]))
+        body.append(border_label(px, pane_y, "zsh", cw, "blue", t))
+        body.append(status_bar(tl, padx, bar_y, inner_w, cw, lh, t, ["zsh"], 0, True))
     else:
         gap = 6
         need = 5 + max(tlen(ln) for ln in BUFFER) + 1
@@ -634,21 +722,20 @@ def hero(t, mobile):
         lx, rx = padx, padx + lw + gap
         lcols = int((lw - 14) // cw)
         rcols = int((rw - 14) // cw)
-        nv = nvim_pane(tl, lx + 7, pane_y + 5, cw, lh, rows, lcols, lw - 2, t, focus_switch)
+        nv = nvim_pane(tl, lx + 7, pane_y + 7, cw, lh, rows, lcols, lw - 2, t, focus_switch)
         body.append(f'<clipPath id="nvc"><rect x="{lx + 1}" y="{pane_y + 1}" width="{f(lw - 2)}" height="{pane_h - 2}"/></clipPath>')
         body.append(f'<g clip-path="url(#nvc)">{nv}</g>')
-        sh, end_t = shell_pane(tl, rx + 7, pane_y + 5, cw, lh, rows, rcols, focus_switch + 0.4, False, t)
-        body.append(f'<clipPath id="shd"><rect x="{f(rx + 1)}" y="{pane_y + 1}" width="{f(rw - 2)}" height="{pane_h - 2}"/></clipPath>')
+        sh, end_t = shell_pane(tl, rx + 7, pane_y + 7, cw, lh, rows, rcols, focus_switch + 0.4, False, t)
+        body.append(f'<clipPath id="shd"><rect x="{f(rx + 1)}" y="{pane_y + 7}" width="{f(rw - 2)}" height="{rows * lh}"/></clipPath>')
         body.append(f'<g clip-path="url(#shd)">{sh}</g>')
-        # pane borders: focused pane is blue (herdr), the other overlay0
-        lb_active = box(lx, pane_y, lw, pane_h, t["blue"])
-        lb_idle = box(lx, pane_y, lw, pane_h, t["overlay0"])
-        rb_active = box(rx, pane_y, rw, pane_h, t["blue"])
-        rb_idle = box(rx, pane_y, rw, pane_h, t["overlay0"])
-        body.append(tl.shown([(0, focus_switch)], lb_active))
-        body.append(tl.shown([(focus_switch, D)], lb_idle))
-        body.append(tl.shown([(0, focus_switch)], rb_idle))
-        body.append(tl.shown([(focus_switch, D)], rb_active))
+        # pane borders + labels: the focused pane is blue (herdr), the other overlay0
+        for (bx, bw, name), active in (((lx, lw, "nvim"), (0, focus_switch)), ((rx, rw, "zsh"), (focus_switch, D))):
+            idle = [(0, active[0])] if active[0] > 0 else [(active[1], D)]
+            body.append(tl.shown([active], box(bx, pane_y, bw, pane_h, t["blue"])
+                                 + border_label(bx, pane_y, name, cw, "blue", t)))
+            body.append(tl.shown(idle, box(bx, pane_y, bw, pane_h, t["overlay0"])
+                                 + border_label(bx, pane_y, name, cw, "overlay1", t)))
+        body.append(status_bar(tl, padx, bar_y, inner_w, cw, lh, t, ["nvim", "zsh"], focus_switch, False))
     assert end_t < D - 2.5, (end_t, D)
     alt = ("A Ghostty terminal running herdr with Catppuccin Mocha. Left pane: Neovim "
            "editing aziz.lua, a profile written as a Lua table: Abduaziz Umarov, UCF "
@@ -659,7 +746,13 @@ def hero(t, mobile):
            "Knight Hacks IX, Backrooms Hyphenate track prize at Cal Hacks 13.0), gh pr list "
            "for 3 merged badges/shields PRs, and tree of the dotfiles repo.")
     if mobile:
-        alt = alt.split(" Left pane:")[0] + " A zsh session types" + alt.split("types", 1)[1]
+        alt = ("A Ghostty terminal running herdr with Catppuccin Mocha. A zsh session types "
+               "tree of the dotfiles repo, whoami, cat .plan (UCF Computer Science May 2028, "
+               "SWE Intern at Versant Media on Rotten Tomatoes, open to Summer 2027 SWE "
+               "internships), ls ~/projects, cat wins.txt (CrisisLens 1st in the Databricks "
+               "Challenge at Hacklytics 2026, Farsight 4 sponsor tracks at Knight Hacks IX, "
+               "Backrooms Hyphenate prize at Cal Hacks 13.0), and gh pr list for 3 merged "
+               "badges/shields PRs.")
     return svg_doc(W, H, t, size, "".join(body), alt), alt
 
 
