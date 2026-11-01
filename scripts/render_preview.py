@@ -45,7 +45,7 @@ def page_html(theme: str, mobile: bool) -> str:
 <style>
  body{{margin:0;background:{c['bg']};color:{c['fg']};font:14px -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}}
  .wrap{{display:flex;gap:24px;max-width:1280px;margin:0 auto;padding:{'16px' if mobile else '32px 24px'}}}
- .box{{flex:1;min-width:0;border:1px solid {c['border']};border-radius:6px;background:{c['box']}}}
+ .box{{flex:{'1' if mobile else 'none'};width:{'auto' if mobile else '880px'};min-width:0;border:1px solid {c['border']};border-radius:6px;background:{c['box']}}}
  .head{{padding:8px 16px;font-size:12px;color:{c['muted']};border-bottom:1px solid {c['border']}}}
  article{{padding:{'16px' if mobile else '24px'}}}
  article p{{margin:0 0 16px}} img{{max-width:100%;vertical-align:middle}}
@@ -80,7 +80,7 @@ def main():
                 ctx = b.new_context(viewport=vp, color_scheme=theme, device_scale_factor=2)
                 pg = ctx.new_page()
                 pg.goto(f"{base}/_page-{theme}{'-m' if mobile else ''}.html")
-                pg.wait_for_timeout(30000 if mobile else 32000)
+                pg.wait_for_timeout(24500 if mobile else 44500)
                 name = f"{'mobile' if mobile else 'desktop'}-{theme}.png"
                 pg.screenshot(path=str(OUT / name), full_page=True)
                 ctx.close()
@@ -93,14 +93,28 @@ def main():
         t0 = time.time()
         pg.goto(f"{base}/_page-dark.html")
         hero = pg.locator("article img").first
-        for i, at in enumerate([2.6, 4.4, 12.0, 19.0, 29.0]):
+        for i, at in enumerate([2.6, 4.6, 14.0, 26.0, 42.0]):
             pg.wait_for_timeout(max(0, (at - (time.time() - t0)) * 1000))
             hero.screenshot(path=str(OUT / f"frame-{i + 1}-t{at:g}s.png"))
             print("frame", at)
-        pg.wait_for_timeout(max(0, (36.5 - (time.time() - t0)) * 1000))
+        pg.wait_for_timeout(max(0, (46.5 - (time.time() - t0)) * 1000))
         video = pg.video.path()
         box = hero.bounding_box()
         ctx.close()
+        mctx = b.new_context(viewport=dict(width=390, height=844), color_scheme="dark",
+                             device_scale_factor=2, record_video_dir=str(OUT / "_mvideo"),
+                             record_video_size=dict(width=390, height=844))
+        pg = mctx.new_page()
+        t0 = time.time()
+        pg.goto(f"{base}/_page-dark-m.html")
+        hero = pg.locator("article img").first
+        for i, at in enumerate([3.0, 9.0, 16.0, 23.0]):
+            pg.wait_for_timeout(max(0, (at - (time.time() - t0)) * 1000))
+            hero.screenshot(path=str(OUT / f"mobile-frame-{i + 1}-t{at:g}s.png"))
+        pg.wait_for_timeout(max(0, (26.5 - (time.time() - t0)) * 1000))
+        mvideo = pg.video.path()
+        mbox = hero.bounding_box()
+        mctx.close()
         b.close()
     srv.shutdown()
     x, y, w, h = (int(box[k]) for k in ("x", "y", "width", "height"))
@@ -112,9 +126,15 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mp4), "-vf",
                     "fps=12,split[a][b];[a]palettegen[p];[b][p]paletteuse",
                     str(OUT / "hero-dark.gif")], check=True)
-    for f in (OUT / "_video").glob("*"):
-        f.unlink()
-    (OUT / "_video").rmdir()
+    x, y, w, h = (int(mbox[k]) for k in ("x", "y", "width", "height"))
+    w, h = w - w % 2, h - h % 2
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mvideo, "-vf",
+                    f"crop={w}:{h}:{x}:{y},fps=12,split[a][b];[a]palettegen[p];[b][p]paletteuse",
+                    str(OUT / "hero-mobile-dark.gif")], check=True)
+    for d in ("_video", "_mvideo"):
+        for f in (OUT / d).glob("*"):
+            f.unlink()
+        (OUT / d).rmdir()
     print("wrote hero-dark.mp4 and hero-dark.gif")
 
 
