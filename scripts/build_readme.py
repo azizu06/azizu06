@@ -154,7 +154,7 @@ PROJECTS = [
         "win_m": "1st · Databricks Challenge · Hacklytics 2026",
         "desc": ("AI dashboard that ranks countries by crisis risk on a 3D globe, "
                  "with Databricks Genie for plain-English questions."),
-        "extra": ("live demo", "https://crisis-lens-v2-web.vercel.app"),
+        "extra": ("demo video", "https://youtu.be/YD6H3emkDrc"),
     },
     {
         "slug": "farsight", "dir": "farsight",
