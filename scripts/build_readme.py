@@ -69,7 +69,6 @@ LINKS = [
     ("azizu.dev", "https://azizu.dev", "Portfolio: azizu.dev"),
     ("linkedin", "https://linkedin.com/in/abduaziz-umarov", "LinkedIn: abduaziz-umarov"),
     ("devpost", "https://devpost.com/azizu06", "Devpost: azizu06"),
-    ("github", "https://github.com/azizu06?tab=repositories", "GitHub repositories: azizu06"),
 ]
 
 # aziz.lua, the Neovim buffer. Tokens: (text, color-key). Key "k" = keyword,
